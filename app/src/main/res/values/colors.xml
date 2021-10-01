@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FA5700</color>
+    <color name="purple_500">#FF5722</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#007BFF</color>
+    <color name="teal_700">#0088FF</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="grad_start">#FFA163</color>
+    <color name="grad_stop">#FF9335</color>
+    <color name="transparent">#00000000</color>
+</resources>

@@ -1,0 +1,27 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="User profile">
+
+        <EditTextPreference
+            app:key="Bio"
+            app:title="Bio"
+            app:useSimpleSummaryProvider="true" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="NSFW mode">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="Enable NSFW content" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Other settings can be found on furryfan.net">
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
