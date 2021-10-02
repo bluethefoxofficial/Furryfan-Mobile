@@ -3,7 +3,6 @@ package com.enclica.furryfan_mobile.ui.gallery;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.enclica.furryfan_mobile.ImageObject;
 import com.enclica.furryfan_mobile.Item;
-import com.enclica.furryfan_mobile.MyAdapter;
+import com.enclica.furryfan_mobile.CommissionAdapter;
 import com.enclica.furryfan_mobile.R;
 
 import org.json.JSONArray;
@@ -42,14 +41,14 @@ public class GalleryFragment extends Fragment {
     private GalleryViewModel galleryViewModel;
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerview;
-    private MyAdapter mAdapter;
+    private CommissionAdapter mAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         recyclerview= root.findViewById(R.id.posts);
-        mAdapter = new MyAdapter(itemList);
+        mAdapter = new CommissionAdapter(itemList);
         RecyclerView.LayoutManager mLayoutManger = new LinearLayoutManager(getContext());
         recyclerview.setLayoutManager(mLayoutManger);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
@@ -82,10 +81,11 @@ public class GalleryFragment extends Fragment {
                                             jsonItem.getString("url"),
                                             jsonItem.getString("filetype"),
                                             jsonItem.getInt("ID"),
-                                            Html.fromHtml(jsonItem.getString("description")),
+                                            jsonItem.getString("description"),
                                             jsonItem.getString("author")
                                     );
-                                    itemList.add(item);
+
+                        itemList.add(item);
                         }
 
 
@@ -113,6 +113,9 @@ public class GalleryFragment extends Fragment {
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(6000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
+
     }
+
+
 
 }

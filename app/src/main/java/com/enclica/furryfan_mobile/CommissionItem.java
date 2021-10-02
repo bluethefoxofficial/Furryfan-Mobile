@@ -1,8 +1,6 @@
 package com.enclica.furryfan_mobile;
 
-public class Item {
-    private int imageId;
-    private String imageURL;
+public class CommissionItem {
     private String title;
     private String filetype;
     private int postID;
@@ -11,9 +9,7 @@ public class Item {
 
 
     private String subtitle;
-    public Item(String title, String subtitle, String imageURL, String filetype, int postID, String description, String author){
-        this.imageId=imageId;
-        this.imageURL=imageURL;
+    public CommissionItem(String title, String subtitle,  String filetype, int postID, String description, String author){
         this.title =title;
         this.subtitle=subtitle;
         this.filetype = filetype;
@@ -21,18 +17,9 @@ public class Item {
         this.description = description;
         this.author = author;
     }
-    public int getImageId(){return imageId;}
-    public void setImageId(int imageId){
-        this.imageId=imageId;
-    }
-
     public  String getTitle(){return title;}
     public void setTitle(String title){
         this.title=title;
-    }
-    public  String getImageURL(){return imageURL;}
-    public void setImageURL(String url){
-        this.imageURL=url;
     }
     public String getSubtitle(){return subtitle;}
     public void setSubtitle(String subtitle){

@@ -27,7 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<com.enclica.furryfan_mobile.CommissionAdapter.MyViewHolder> {
+public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.MyViewHolder> {
     private List<Item>itemList;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, subtitle;
@@ -45,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<com.enclica.furryfan_mobile.
 
                 @Override
                 public void onClick(View v) {
-                  //  Toast.makeText(itemView.getContext(), "P-sPosition:" + Integer.toString(getPosition()), Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(itemView.getContext(), "P-sPosition:" + Integer.toString(getPosition()), Toast.LENGTH_SHORT).show();
                     Item itemvalue = itemList.get(getPosition());
 
                     switch(itemvalue.getFiletype())
@@ -68,7 +68,7 @@ public class MyAdapter extends RecyclerView.Adapter<com.enclica.furryfan_mobile.
                             myintent.putExtra("author",itemvalue.getAuthor());
                             myintent.putExtra("title",itemvalue.getTitle());
                             myintent.putExtra("description",itemvalue.getDescription());
-                          parent.getContext().startActivity(myintent);
+                            parent.getContext().startActivity(myintent);
 
                             break;
                     }
@@ -85,11 +85,11 @@ public class MyAdapter extends RecyclerView.Adapter<com.enclica.furryfan_mobile.
             });
         }
     }
-    public MyAdapter(List<Item>itemList){
+    public CommissionAdapter(List<Item>itemList){
         this.itemList=itemList;
     }
     @Override
-    public com.enclica.furryfan_mobile.CommissionAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CommissionAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.imageitem,parent,false);
         return new MyViewHolder(itemView);
     }
@@ -98,7 +98,7 @@ public class MyAdapter extends RecyclerView.Adapter<com.enclica.furryfan_mobile.
         Item row=itemList.get(position);
         holder.title.setText(row.getTitle());
         holder.subtitle.setText(Html.fromHtml( row.getSubtitle()));
-       // holder.icon.setImageURI(Picasso.get().load(row.getImageURL()); INVALID
+        // holder.icon.setImageURI(Picasso.get().load(row.getImageURL()); INVALID
 
 
         switch(row.getFiletype()){

@@ -5,6 +5,7 @@
         <EditTextPreference
             app:key="Bio"
             app:title="Bio"
+            
             app:useSimpleSummaryProvider="true" />
 
 
@@ -15,11 +16,6 @@
         <SwitchPreferenceCompat
             app:key="sync"
             app:title="Enable NSFW content" />
-
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="Other settings can be found on furryfan.net">
 
 
     </PreferenceCategory>

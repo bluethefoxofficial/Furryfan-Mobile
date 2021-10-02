@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             if(mSettings.contains("token")){
 
                 startActivity(new Intent(getApplicationContext(), Newuserpage.class));
+                finish();
 
             }
             rellay1.setVisibility(View.VISIBLE);
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                                 editor.commit();
 
                                 startActivity(new Intent(getApplicationContext(), Newuserpage.class));
-
+                                finish();
                             } else {
 
                                 Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to login. Please check your username and password and try again.", Snackbar.LENGTH_LONG)
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.accountrecovery) {
          //   startActivity(new Intent(getApplicationContext(), accountrecovery.class));
         } else if (view.getId() == R.id.signup) {
+
             startActivity(new Intent(getApplicationContext(), signup.class));
         } else if (view.getId() == R.id.logintoff) {
             login();
