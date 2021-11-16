@@ -41,7 +41,10 @@ public class imageviewer extends AppCompatActivity {
         txtRegister .setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-
+                Intent myintent = new Intent(getApplicationContext(), Profile_page.class);
+                myintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                myintent.putExtra("profile",secondIntent.getStringExtra("author"));
+                getApplicationContext().startActivity(myintent);
             }
 
 

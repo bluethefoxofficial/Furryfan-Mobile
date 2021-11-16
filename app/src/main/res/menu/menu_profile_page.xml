@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.enclica.furryfan_mobile.Profile_page">
+    <item
+        android:id="@+id/commission"
+        android:title="Commission" />
+    <item
+        android:id="@+id/report__btn"
+        android:title="Report" />
+    <item
+        android:id="@+id/Shouts"
+        android:orderInCategory="100"
+        android:title="Shouts"
+        app:showAsAction="never" />
+</menu>

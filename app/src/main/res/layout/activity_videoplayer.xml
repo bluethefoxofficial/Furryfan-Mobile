@@ -6,46 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".Videoplayer">
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="408dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <VideoView
-            android:id="@+id/videoplayer"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/vptitle"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Placeholder title"
-        android:textSize="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="0dp"
+                android:layout_height="91dp"
+                android:ems="10"
+                android:hint="Comment here"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vvusername" />
 
-    <TextView
-        android:id="@+id/videoviewdescription"
-        android:layout_width="match_parent"
-        android:layout_height="99dp"
-        android:text="This is a placeholder for the description if you see this and are not in devmode please report to the furryfan mobile github."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vptitle" />
+            <TextView
+                android:id="@+id/vvusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:paddingLeft="20px"
+                android:text="placeholder username"
+                android:textColor="@color/purple_500"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/videoviewdescription" />
 
-    <TextView
-        android:id="@+id/vvusername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:text="placeholder username"
-        android:textColor="@color/purple_500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoviewdescription" />
+            <TextView
+                android:id="@+id/videoviewdescription"
+                android:layout_width="match_parent"
+                android:layout_height="99dp"
+                android:paddingLeft="20px"
+                android:text="This is a placeholder for the description if you see this and are not in devmode please report to the furryfan mobile github."
+                app:layout_constraintTop_toBottomOf="@+id/vptitle" />
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="408dp">
+
+                <VideoView
+                    android:id="@+id/videoplayer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/vptitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="20px"
+                android:text="Placeholder title"
+                android:textSize="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+            <ImageButton
+                android:id="@+id/sendbtncmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+                app:srcCompat="@android:drawable/ic_menu_send" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

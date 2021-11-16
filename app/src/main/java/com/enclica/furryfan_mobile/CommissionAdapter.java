@@ -19,8 +19,6 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -101,18 +99,6 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.My
         // holder.icon.setImageURI(Picasso.get().load(row.getImageURL()); INVALID
 
 
-        switch(row.getFiletype()){
-            case "mp3":
-                holder.icon.setImageResource(R.drawable.ic_baseline_music_note_24);
-                break;
-            case "mp4":
-                holder.icon.setImageResource(R.drawable.ic_baseline_ondemand_video_24);
-                break;
-            default:
-                Picasso.get().load(row.getImageURL()).into(holder.icon);
-                break;
-
-        }
     }
     @Override
     public int getItemCount() {

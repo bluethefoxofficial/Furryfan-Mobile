@@ -1,8 +1,11 @@
 package com.enclica.furryfan_mobile.ui.gallery;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.enclica.furryfan_mobile.ImageObject;
 import com.enclica.furryfan_mobile.Item;
-import com.enclica.furryfan_mobile.CommissionAdapter;
+import com.enclica.furryfan_mobile.MyAdapter;
 import com.enclica.furryfan_mobile.R;
 
 import org.json.JSONArray;
@@ -34,21 +37,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
     private List<Item> itemList = new ArrayList<>();
     private RecyclerView recyclerview;
-    private CommissionAdapter mAdapter;
+    private MyAdapter mAdapter;
+    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        root = inflater.inflate(R.layout.fragment_gallery, container, false);
         recyclerview= root.findViewById(R.id.posts);
-        mAdapter = new CommissionAdapter(itemList);
+        mAdapter = new MyAdapter(itemList);
         RecyclerView.LayoutManager mLayoutManger = new LinearLayoutManager(getContext());
         recyclerview.setLayoutManager(mLayoutManger);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
@@ -75,9 +77,9 @@ public class GalleryFragment extends Fragment {
                         ArrayList<ImageObject> imageObjects = new ArrayList<>();
                         for (int i = 0; i < allImageArray.length(); i++) {
                             JSONObject jsonItem = allImageArray.optJSONObject(i);
-
+                            Log.d("tag", jsonItem.toString());
                                     Item item = new Item(jsonItem.optString("title"),
-                                            jsonItem.getString("author"),
+                                            jsonItem.get("author").toString(),
                                             jsonItem.getString("url"),
                                             jsonItem.getString("filetype"),
                                             jsonItem.getInt("ID"),
@@ -100,7 +102,10 @@ public class GalleryFragment extends Fragment {
                         });
                     }
                 } catch (Exception e) {
+                    Log.e("error",e.toString());
+
                     Toast.makeText(getContext(), "A json error occured when loading the posts.   " + e.getMessage(), Toast.LENGTH_LONG).show();
+
                 }
 
             }

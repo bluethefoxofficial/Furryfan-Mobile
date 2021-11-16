@@ -47,6 +47,8 @@ public class Videoplayer extends AppCompatActivity {
                 mp.setVolume(1, 1);
             }
         });
+
+
         ActionBar actionBar = getSupportActionBar();
 
         // showing the back button in action bar

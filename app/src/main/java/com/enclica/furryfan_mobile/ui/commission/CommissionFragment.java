@@ -1,4 +1,4 @@
-package com.enclica.furryfan_mobile.ui.slideshow;
+package com.enclica.furryfan_mobile.ui.commission;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,14 +11,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.enclica.furryfan_mobile.R;
 
-public class SlideshowFragment extends Fragment {
+public class CommissionFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private CommissionViewModel commissionViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        commissionViewModel =
+                new ViewModelProvider(this).get(CommissionViewModel.class);
         View root = inflater.inflate(R.layout.fragment_commissions, container, false);
         getActivity().setTitle("Your commission requests");
         return root;

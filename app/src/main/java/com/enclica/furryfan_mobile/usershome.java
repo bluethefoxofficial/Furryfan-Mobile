@@ -32,7 +32,7 @@ public class usershome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usershome);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.follow);
         FloatingActionButton fab2 = findViewById(R.id.fab2);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +50,7 @@ public class usershome extends AppCompatActivity {
 
         gridView = (GridView) findViewById(R.id.posts);
         getData();
-        setTitle("Furryfan Gallery test weewoooweeewooo");
+
     }
 
 

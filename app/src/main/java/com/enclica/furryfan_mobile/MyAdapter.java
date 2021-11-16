@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<com.enclica.furryfan_mobile.CommissionAdapter.MyViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private List<Item>itemList;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, subtitle;
@@ -51,15 +50,19 @@ public class MyAdapter extends RecyclerView.Adapter<com.enclica.furryfan_mobile.
                     switch(itemvalue.getFiletype())
                     {
                         case "mp4":
+                        case "mp3":
+                        case "wav":
+
                             myintent = new Intent(parent.getContext(), Videoplayer.class);
+                            myintent.putExtra("TEST","TEST");
                             myintent.putExtra("url",itemvalue.getImageURL());
                             myintent.putExtra("author",itemvalue.getAuthor());
                             myintent.putExtra("title",itemvalue.getTitle());
+
                             myintent.putExtra("description",itemvalue.getDescription());
+                            myintent.putExtra("id",itemvalue.getPostID());
+
                             parent.getContext().startActivity(myintent);
-                            break;
-                        case "mp3":
-                            Toast.makeText(itemView.getContext(), "Non functional", Toast.LENGTH_SHORT).show();
                             break;
                         default:
 
@@ -89,7 +92,7 @@ public class MyAdapter extends RecyclerView.Adapter<com.enclica.furryfan_mobile.
         this.itemList=itemList;
     }
     @Override
-    public com.enclica.furryfan_mobile.CommissionAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.imageitem,parent,false);
         return new MyViewHolder(itemView);
     }

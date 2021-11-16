@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    android:focusable="true"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:clickable="true"
-    android:background="?android:attr/selectableItemBackground"
-    android:orientation="vertical">
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="10dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="10dp">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="364dp"
         android:layout_height="510dp"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:adjustViewBounds="true"
-        android:layout_centerInParent="true"
-       />
+        app:srcCompat="@drawable/ic_baseline_watch_later_24" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/vptitle"
-        android:layout_toRightOf="@+id/icon"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:textColor="#FFD0DC"
-        android:textSize="24dp"
-        />
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/commissiondescription"
         android:layout_toRightOf="@+id/icon"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="#FFD0DC"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/commissiondescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/vptitle"
+        android:layout_toRightOf="@+id/icon"
         android:paddingLeft="14dp"
         android:textColor="#3399FF"
-        android:textSize="14dp"/>
+        android:textSize="14dp" />
 </LinearLayout>
