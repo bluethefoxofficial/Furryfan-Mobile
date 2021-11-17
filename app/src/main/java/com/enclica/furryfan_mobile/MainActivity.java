@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -31,7 +32,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     RelativeLayout rellay1, rellay2;
     EditText username;
-
+    ActionBar actionBar;
     Handler handler = new Handler();
     Runnable runnable = new Runnable() {
         @Override
@@ -59,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
         rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
-
+        actionBar = getSupportActionBar();
+        actionBar.hide();
         handler.postDelayed(runnable, 2000); //2000 is the timeout for the splash
     }
     //login verification code
@@ -82,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor;
                                 editor = mSettings.edit();
                                 editor.putString("token", jObject.getString("token"));
+                                editor.putString("username",username.getText().toString());
+
                                 editor.commit();
 
                                 startActivity(new Intent(getApplicationContext(), Newuserpage.class));

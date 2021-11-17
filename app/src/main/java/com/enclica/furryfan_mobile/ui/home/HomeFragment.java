@@ -212,11 +212,10 @@ public class HomeFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
-
                                 mAdapter.notifyDataSetChanged();
                             }
                         });
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

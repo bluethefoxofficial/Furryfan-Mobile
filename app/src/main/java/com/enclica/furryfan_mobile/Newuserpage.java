@@ -51,7 +51,7 @@ public class Newuserpage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // startActivity(new Intent(getApplicationContext(), MainActivity2.class)); fix later
+                startActivity(new Intent(getApplicationContext(), Upload_web_window.class));
             }
         });
 
@@ -62,7 +62,7 @@ public class Newuserpage extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,R.id.nav_chat,R.id.about_btn)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,R.id.nav_chats)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -96,6 +96,14 @@ public class Newuserpage extends AppCompatActivity {
             // action with ID action_settings was selected
             case R.id.Shouts:
                 opensettings();
+                break;
+
+            case R.id.logout:
+                final SharedPreferences mSettings = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
+                mSettings.edit().clear().commit();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                super.finish();
+
                 break;
 
             case 16908332:

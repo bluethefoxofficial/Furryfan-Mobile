@@ -20,15 +20,15 @@
             android:icon="@drawable/ic_baseline_brush_24"
             android:title="Commissions" />
         <item
-            android:id="@+id/nav_chat"
+            android:id="@+id/nav_chats"
             android:icon="@drawable/ic_baseline_chat_24"
             android:title="Your Chats" />
         <item
-            android:id="@+id/about_btn"
+            android:id="@+id/nav_about"
             android:icon="@drawable/ic_baseline_info_24"
+            android:layout_alignParentBottom="true"
             android:title="About" />
 
 
     </group>
-    <group />
 </menu>

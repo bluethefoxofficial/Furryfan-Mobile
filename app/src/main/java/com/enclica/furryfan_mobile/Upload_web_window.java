@@ -19,6 +19,7 @@ import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,10 +27,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+public class Upload_web_window extends AppCompatActivity {
 
-public class Settings extends AppCompatActivity {
-
-
+    private AppBarConfiguration appBarConfiguration;
 
     public static final int INPUT_FILE_REQUEST_CODE = 1;
 
@@ -38,13 +38,17 @@ public class Settings extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_upload_web_window);
+
+
+
+        WebView wv = (WebView) findViewById(R.id.wv1);
+
+        // showing the back button in action bar
 
         final SharedPreferences mSettings = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
 
-        WebView wv = (WebView) findViewById(R.id.wviewer);
         wv.getSettings().setAllowContentAccess(true);
         wv.getSettings().setAllowFileAccess(true);
         wv.getSettings().setJavaScriptEnabled(true);
@@ -56,7 +60,7 @@ public class Settings extends AppCompatActivity {
         String cookieString = "token="+mSettings.getString("token","t")+"; path=/";
         CookieManager.getInstance().setCookie("furryfan.net", cookieString);
 
-
+       // ActionBar actionBar = getSupportActionBar();
 
         wv.setWebViewClient(new WebViewClient() {
 
@@ -118,10 +122,10 @@ public class Settings extends AppCompatActivity {
                     File photoFile = null;
                     try {
                         photoFile = createImageFile();
-                        takePictureIntent.putExtra("PhotoPath", mCameraPhotoPath);
+                        takePictureIntent.putExtra("FilePath", mCameraPhotoPath);
                     } catch (IOException ex) {
                         // Error occurred while creating the File
-                        Log.e("TAG", "Unable to create Image File", ex);
+                        Log.e("TAG", "Unable to create File", ex);
                     }
 
                     // Continue only if the File was successfully created
@@ -136,7 +140,7 @@ public class Settings extends AppCompatActivity {
 
                 Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
-                contentSelectionIntent.setType("image/*");
+                contentSelectionIntent.setType("*/*");
 
                 Intent[] intentArray;
                 if (takePictureIntent != null) {
@@ -156,7 +160,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        wv.loadUrl("https://furryfan.net/settings");
+        wv.loadUrl("https://furryfan.net/upload");
     }
 
     /**
@@ -190,10 +194,10 @@ public class Settings extends AppCompatActivity {
 
         // Check that the response is a good one
 
-                String dataString = data.getDataString();
-                if (dataString != null) {
-                    results = new Uri[]{Uri.parse(dataString)};
-                }
+        String dataString = data.getDataString();
+        if (dataString != null) {
+            results = new Uri[]{Uri.parse(dataString)};
+        }
 
 
 
@@ -221,5 +225,6 @@ public class Settings extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-}
 
+
+}

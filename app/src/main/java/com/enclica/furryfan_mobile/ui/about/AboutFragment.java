@@ -1,4 +1,4 @@
-package com.enclica.furryfan_mobile.ui.chat;
+package com.enclica.furryfan_mobile.ui.about;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.enclica.furryfan_mobile.R;
 
 
-public class ChatFragment extends Fragment {
+public class AboutFragment extends Fragment {
 
 
-    private ChatViewModel commissionViewModel;
+    private AboutViewModel aboutViewModel;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +24,10 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        commissionViewModel =
-                new ViewModelProvider(this).get(ChatViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_chat, container, false);
-        getActivity().setTitle("Your Chats");
+        aboutViewModel =
+                new ViewModelProvider(this).get(AboutViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_about, container, false);
+        getActivity().setTitle("About Furryfan");
         return root;
 
     }

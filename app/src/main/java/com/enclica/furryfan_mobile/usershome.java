@@ -30,10 +30,10 @@ public class usershome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usershome);
+       // setContentView(R.layout.activity_usershome);
 
         FloatingActionButton fab = findViewById(R.id.follow);
-        FloatingActionButton fab2 = findViewById(R.id.fab2);
+     //   FloatingActionButton fab2 = findViewById(R.id.fab2);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,12 +41,7 @@ public class usershome extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Newuserpage.class));
             }
         });
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-            }
-        });
+       
 
         gridView = (GridView) findViewById(R.id.posts);
         getData();

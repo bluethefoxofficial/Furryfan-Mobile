@@ -2,16 +2,16 @@ package com.enclica.furryfan_mobile;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.enclica.furryfan_mobile.databinding.ActivityProfilePageBinding;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -37,7 +38,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Profile_page extends AppCompatActivity {
 
@@ -49,8 +52,9 @@ public class Profile_page extends AppCompatActivity {
     private List<Item> itemList = new ArrayList<>();
     Toolbar toolbar;
     MyAdapter mAdapter;
+    SharedPreferences mSettings;
     private View root;
-
+    public int id;
 
 
     @Override
@@ -70,41 +74,140 @@ public class Profile_page extends AppCompatActivity {
         setTitle(secondIntent.getStringExtra("profile"));
         toolBarLayout.setTitle(getTitle());
         actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        mSettings = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
+
+        Log.i("Msettings-logger",mSettings.getAll().toString());
+
+
+
         root = View.inflate(getApplicationContext(), R.layout.content_scrolling, null);
-        recyclerView= root.findViewById(R.id.b_contents);
+        recyclerView = findViewById(R.id.b_contents);
+        mAdapter = new MyAdapter(itemList);
         RecyclerView.LayoutManager mLayoutManger = new LinearLayoutManager(Profile_page.this.getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManger);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-
-
-        FloatingActionButton fab = binding.fabFollow;
+        fab = binding.fab;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //fab.setImageResource(R.drawable.ic_baseline_person_remove_24);
+
+                if (fab.getTag().equals(R.drawable.ic_baseline_person_remove_24)) {
+                    unfollow();
+                    fab.setImageResource(R.drawable.ic_baseline_person_add_24);
+                    fab.setTag(R.drawable.ic_baseline_person_add_24);
+
+                }else{
+                    follow();
+                    fab.setImageResource(R.drawable.ic_baseline_person_remove_24);
+                    fab.setTag(R.drawable.ic_baseline_person_remove_24);
+                }
+
 
             }
         });
 
+
         loaduserinfo();
         loadposts();
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
 
+        return false;
     }
 
 
 
+        public void unfollow(){
 
+            StringRequest postRequest = new StringRequest(Request.Method.POST, "https://furryfan.net/api/",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
 
+                            Log.i("FRESPONSE",response);
+                            Snackbar.make(getWindow().getDecorView().getRootView(), "Unfollowed", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Snackbar.make(getWindow().getDecorView().getRootView(), "Failed", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    }
+            ) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("token", mSettings.getString("token","token"));
+                    params.put("userid", String.valueOf(id));
+                    params.put("function", "unfollow");
 
-        public void follow(){
+                    return params;
+                }
+            };
+        Log.i("k",mSettings.getString("token","token"));
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            queue.add(postRequest);
+
 
         }
 
+        public void follow(){
+
+
+            StringRequest postRequest = new StringRequest(Request.Method.POST, "https://furryfan.net/api/",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.i("FRESPONSE",response);
+                            Snackbar.make(getWindow().getDecorView().getRootView(), "Followed", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Snackbar.make(getWindow().getDecorView().getRootView(), "Failed", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    }
+            ) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("token", mSettings.getString("token","token"));
+                    params.put("userid", String.valueOf(id));
+                    params.put("function", "follow");
+
+                    return params;
+                }
+            };
+            Log.i("k",mSettings.getString("token","token"));
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            queue.add(postRequest);
+
+
+        }
+
+
+
     public void loaduserinfo() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        final SharedPreferences mSettings = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
+
         Log.i("WEB GET INFO ","https://furryfan.net/api/?function=getuserinfo&username=" + secondIntent.getStringExtra("profile"));
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://furryfan.net/api/?function=getuserinfo&username=" + secondIntent.getStringExtra("profile"),
                 new Response.Listener<String>() {
@@ -119,24 +222,37 @@ public class Profile_page extends AppCompatActivity {
                             ImageView profilepciture = Profile_page.this.findViewById(R.id.profilepictureprofile);
                             ImageView verified = Profile_page.this.findViewById(R.id.imageView5);
 
-Log.i("t","This might work?");
+                            Log.i("t","This might work?");
 
-bio.setText(jObject.getString("bio").replaceAll("\\[[^]]+]",""));
-                            Picasso.get().load("https://cdn.furryfan.net/art/" + jObject.getString("username") + "/data/pfp/" + jObject.getString("profilepicture").replace("_sm_400", "_sm_50")).into(profilepciture);
+                            bio.setText(jObject.getString("bio").replaceAll("\\[[^]]+]",""));
+                            Picasso.get().load("https://cdn.furryfan.net/art/" + jObject.getString("username") + "/data/pfp/" + jObject.getString("profilepicture").replace("_sm_400", "_sm_200")).into(profilepciture);
 
                                     if (jObject.getInt("verified") == 1) {
                                        verified.setImageResource(R.drawable.ic_baseline_verified_24);
                                     }
 
+                                    if(jObject.getString("followers").contains(mSettings.getString("username", "username"))){
+                                        fab.setImageResource(R.drawable.ic_baseline_person_remove_24);
+
+                                        fab.setTag(R.drawable.ic_baseline_person_remove_24);
+                                    }else{
+
+                                        fab.setTag(R.drawable.ic_baseline_person_add_24);
+                                    }
+
+                                    id = jObject.getInt("ID");
+                                    Log.i("Un",mSettings.getString("username","username"));
+                                    Log.i("json key", String.valueOf(jObject.getString("followers").contains(mSettings.getString("username","username"))));
+
 
 
 
                     try {
-                        ColorDrawable colorDrawable
-                                = new ColorDrawable(Color.parseColor(jObject.getString("bannercolourhex").substring(0, jObject.getString("bannercolourhex").length() - 2)));
-                        actionBar.setBackgroundDrawable(
-                                colorDrawable
-                        );
+                        //ColorDrawable colorDrawable
+                         //       = new ColorDrawable(Color.parseColor(jObject.getString("bannercolourhex").substring(0, jObject.getString("bannercolourhex").length() - 2)));
+                       // actionBar.setBackgroundDrawable(
+                           //     colorDrawable
+                        //);
                         // toolbar.setBackground(colorDrawable);
 
 
@@ -145,12 +261,15 @@ bio.setText(jObject.getString("bio").replaceAll("\\[[^]]+]",""));
 
 
                     }
-                            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_follow);
 
-                    if(jObject.getString("followers").contains(" " + mSettings.getString("Login","username") + " ")){
+                    if(jObject.getString("followers").contains(mSettings.getString("username","username"))){
                         fab.setImageResource(R.drawable.ic_baseline_person_remove_24);
+                        fab.setTag(R.drawable.ic_baseline_person_remove_24);
+                        Log.i("FI", "1");
                     }else{
                         fab.setImageResource(R.drawable.ic_baseline_person_add_24);
+                        fab.setTag(R.drawable.ic_baseline_person_add_24);
+                        Log.i("FI", "0");
                     }
 
 
@@ -158,12 +277,6 @@ bio.setText(jObject.getString("bio").replaceAll("\\[[^]]+]",""));
                             } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
                         }
-
-
-
-
-
-
 
                     }
                 },
@@ -179,10 +292,7 @@ bio.setText(jObject.getString("bio").replaceAll("\\[[^]]+]",""));
 
     }
 
-
-
     //load posts of user
-
 
     public void loadposts(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
@@ -222,8 +332,6 @@ bio.setText(jObject.getString("bio").replaceAll("\\[[^]]+]",""));
                         Profile_page.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
-
                                 mAdapter.notifyDataSetChanged();
                             }
                         });
@@ -245,12 +353,5 @@ bio.setText(jObject.getString("bio").replaceAll("\\[[^]]+]",""));
         queue.add(stringRequest);
         Log.i("tl", stringRequest.getUrl());
     }
-
-
-
-
-
-
-
 
 }
