@@ -2,16 +2,17 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroundprofile"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-
     tools:context=".pages.Profile_page">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="198dp"
         android:fitsSystemWindows="true"
         android:theme="@style/Theme.FurryfanMobile.AppBarOverlay">
 
@@ -20,8 +21,8 @@
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:fabCradleMargin="50px"
             android:fitsSystemWindows="true"
+            app:fabCradleMargin="50px"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
@@ -47,22 +48,67 @@
         android:layout_height="wrap_content"
 
         android:layout_alignTop="@+id/fab_message"
-
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="50px"
 
         android:layout_marginEnd="20dp"
 
-
         android:layout_marginRight="16dp"
+
+
         android:layout_toStartOf="@+id/fab_message"
+        android:background="@drawable/btn_bg"
         android:paddingRight="20px"
+        android:tooltipText="Follow/Unfollow user."
         app:fabSize="auto"
         app:layout_anchor="@+id/app_bar"
-        app:layout_anchorGravity="end|bottom"
-        app:srcCompat="@drawable/ic_baseline_person_add_24"
+        app:layout_anchorGravity="bottom|right"
 
 
-        />
+        app:srcCompat="@drawable/ic_baseline_person_add_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/Combtn"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@+id/fab_message"
+        android:tooltipText="Commission user."
+
+
+        android:layout_marginLeft="16dp"
+        android:layout_toStartOf="@+id/fab_message"
+        android:background="@drawable/btn_bg"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        app:fabSize="auto"
+
+
+        app:layout_anchor="@+id/app_bar"
+        app:layout_anchorGravity="bottom|left"
+        app:srcCompat="@drawable/ic_baseline_brush_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/messagebtn"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@+id/fab_message"
+        android:tooltipText="Message user."
+
+
+        android:layout_marginLeft="16dp"
+        android:layout_toStartOf="@+id/fab_message"
+        android:background="@drawable/btn_bg"
+        android:paddingLeft="20px"
+        android:paddingRight="20px"
+        app:fabSize="auto"
+
+
+        app:layout_anchor="@+id/app_bar"
+        app:layout_anchorGravity="bottom|center"
+        app:srcCompat="@drawable/ic_baseline_chat_24" />
 
     <LinearLayout
         android:layout_width="match_parent"

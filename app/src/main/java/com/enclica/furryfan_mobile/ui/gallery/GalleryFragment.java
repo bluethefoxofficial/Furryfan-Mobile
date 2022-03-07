@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -44,6 +45,7 @@ public class GalleryFragment extends Fragment {
     private RecyclerView recyclerview;
     private MyAdapter mAdapter;
     private View root;
+    private SwipeRefreshLayout refresh;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,13 +58,27 @@ public class GalleryFragment extends Fragment {
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setAdapter(mAdapter);
 
+        refresh = root.findViewById(R.id.gallery_refresh);
+
+
+
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                refresh.setRefreshing(false);
+            }
+        });
+
+
         getData();
         return root;
     }
 
     private void getData() {
 
-
+        itemList.clear();
+        mAdapter.notifyDataSetChanged();
         RequestQueue queue = Volley.newRequestQueue(getContext());
         final SharedPreferences mSettings = getContext().getSharedPreferences("Login", MODE_PRIVATE);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://furryfan.net/api?function=browse&num=30&token=" + mSettings.getString("token", ""), new Response.Listener<String>() {
@@ -84,7 +100,8 @@ public class GalleryFragment extends Fragment {
                                             jsonItem.getString("filetype"),
                                             jsonItem.getInt("ID"),
                                             jsonItem.getString("description"),
-                                            jsonItem.getString("author")
+                                            jsonItem.getString("author"),
+                                            jsonItem.getString("rating")
                                     );
 
                         itemList.add(item);

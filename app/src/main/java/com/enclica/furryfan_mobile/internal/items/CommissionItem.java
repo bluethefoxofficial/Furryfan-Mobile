@@ -7,10 +7,11 @@ public class CommissionItem{
     private int ID;
     private int approved;
     private int completed;
+    private  int reported;
 
 
     private String subtitle;
-    public CommissionItem(String refsheeturl, String desc,  String sender, int ID, int approved, int completed){
+    public CommissionItem(String refsheeturl, String desc,  String sender, int ID, int approved, int completed,int reported){
         this.refsheeturl =refsheeturl;
         this.desc=desc;
         this.sender = sender;
@@ -18,6 +19,7 @@ public class CommissionItem{
         this.ID = ID;
         this.approved = approved;
         this.completed = completed;
+        this.reported = reported;
     }
     public  String getrefsheetURL(){return refsheeturl;}
     public void setrefsheeturl(String refsheeturl){
@@ -37,5 +39,7 @@ public class CommissionItem{
     public void setApproved(int approved){this.approved=approved;}
     public int getCompleted(){return completed;}
     public void setCompleted(int completed){this.completed=completed;}
+    public  int getReported(){return reported;}
+    public void setReported(int reported){this.reported = reported;}
 
 }

@@ -27,7 +27,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/advanced_settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -35,7 +35,6 @@
                 android:text="Developed by Bluethefox published by Enclica" />
 
             <ImageView
-                android:id="@+id/imageView3"
                 android:layout_width="202dp"
                 android:layout_height="184dp"
                 android:layout_gravity="center"
@@ -54,6 +53,13 @@
                 android:layout_height="wrap_content"
                 android:text="developer twitter"
                 app:chipIcon="@drawable/ic_iconmonstr_twitter_1" />
+
+            <Button
+                android:id="@+id/osl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_bg"
+                android:text="open source Licences" />
         </LinearLayout>
     </ScrollView>
 

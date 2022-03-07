@@ -7,14 +7,16 @@ public class Item {
     private String filetype;
     private int postID;
     private String description;
+    private String rating;
     private String author;
 
 
     private String subtitle;
-    public Item(String title, String subtitle, String imageURL, String filetype, int postID, String description, String author){
+    public Item(String title, String subtitle, String imageURL, String filetype, int postID, String description, String author,String rating){
         this.imageId=imageId;
         this.imageURL=imageURL;
         this.title =title;
+        this.rating=rating;
         this.subtitle=subtitle;
         this.filetype = filetype;
         this.postID = postID;
@@ -28,6 +30,9 @@ public class Item {
     public void setImageId(int imageId){
         this.imageId=imageId;
     }
+
+    public String getRating(){return rating;}
+    public void setRating(String rating){this.rating=rating;}
 
     public  String getTitle(){return title;}
     public void setTitle(String title){

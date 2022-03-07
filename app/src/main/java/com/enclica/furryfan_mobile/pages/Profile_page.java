@@ -1,5 +1,8 @@
 package com.enclica.furryfan_mobile.pages;
 
+import static android.graphics.Color.parseColor;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -7,15 +10,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.enclica.furryfan_mobile.MainActivity;
 import com.enclica.furryfan_mobile.R;
 import com.enclica.furryfan_mobile.databinding.ActivityProfilePageBinding;
 import com.enclica.furryfan_mobile.internal.adapters.MyAdapter;
@@ -51,10 +59,12 @@ public class Profile_page extends AppCompatActivity {
     private ActivityProfilePageBinding binding;
     Intent secondIntent;
     FloatingActionButton fab;
+    private FloatingActionButton commissionbtn;
     ActionBar actionBar;
     RecyclerView recyclerView;
     private List<Item> itemList = new ArrayList<>();
     Toolbar toolbar;
+    public String username;
     MyAdapter mAdapter;
     SharedPreferences mSettings;
     private View root;
@@ -223,8 +233,101 @@ public class Profile_page extends AppCompatActivity {
 
                             TextView bio = Profile_page.this.findViewById(R.id.profilebio);
 
+                            CoordinatorLayout bg = Profile_page.this.findViewById(R.id.backgroundprofile);
+                            FloatingActionButton commissionbtn = Profile_page.this.findViewById(R.id.Combtn);
                             ImageView profilepciture = Profile_page.this.findViewById(R.id.profilepictureprofile);
                             ImageView verified = Profile_page.this.findViewById(R.id.imageView5);
+
+                            commissionbtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+
+
+
+                                    AlertDialog.Builder alert = new AlertDialog.Builder(Profile_page.this);
+
+                                    alert.setTitle("Send commission request to "+username+".");
+
+                                    LinearLayout layout = new LinearLayout(getApplicationContext());
+                                    layout.setOrientation(LinearLayout.VERTICAL);
+
+
+                                    EditText name = new EditText(getApplicationContext());
+                                    name.setHint("Your name");
+                                    name.setMaxLines(2);
+                                    layout.addView(name);
+
+
+                                    EditText refsheeturl = new EditText(getApplicationContext());
+                                    refsheeturl.setHint("Your reference sheet URL for your character.");
+                                    refsheeturl.setMaxLines(2);
+                                    layout.addView(refsheeturl);
+
+                                    EditText details = new EditText(getApplicationContext());
+                                    details.setHint("Details about this commission.");
+                                    details.setMaxLines(10);
+                                    layout.addView(details);
+
+
+
+
+                                    alert.setPositiveButton("Send request", new DialogInterface.OnClickListener() {
+
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+
+                                            StringRequest postRequest = new StringRequest(Request.Method.POST, "https://furryfan.net/api/",
+                                                    new Response.Listener<String>() {
+                                                        @Override
+                                                        public void onResponse(String response) {
+                                                            Log.i("FRESPONSE",response);
+                                                            Snackbar.make(getWindow().getDecorView().getRootView(), "Sent request.", Snackbar.LENGTH_LONG)
+                                                                    .setAction("Action", null).show();
+                                                            Log.i("t","IT WORKS I THINK?");
+                                                        }
+                                                    },
+                                                    new Response.ErrorListener() {
+                                                        @Override
+                                                        public void onErrorResponse(VolleyError error) {
+                                                            Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to send request", Snackbar.LENGTH_LONG)
+                                                                    .setAction("Action", null).show();
+                                                            Log.i("t","DAMN IT!");
+                                                        }
+                                                    }
+                                            ) {
+                                                @Override
+                                                protected Map<String, String> getParams() {
+                                                    Map<String, String> params = new HashMap<String, String>();
+                                                    params.put("token", mSettings.getString("token","token"));
+                                                    params.put("receiver", username);
+                                                    params.put("refsheet", refsheeturl.getText().toString());
+                                                    params.put("description", details.getText().toString());
+                                                    params.put("name", name.getText().toString());
+                                                    params.put("function", "sendcommission");
+
+                                                    return params;
+                                                }
+                                            };
+
+
+                                        }
+
+                                    });
+
+                                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Log.d("e","EEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                                        }
+                                    });
+                                    alert.setView(layout);
+
+                                    alert.show();
+
+
+
+
+                                }
+                            });
 
                             Log.i("t","This might work?");
 
@@ -234,6 +337,9 @@ public class Profile_page extends AppCompatActivity {
                                     if (jObject.getInt("verified") == 1) {
                                        verified.setImageResource(R.drawable.ic_baseline_verified_24);
                                     }
+                                    username = jObject.getString("username");
+
+                                    bg.setBackgroundColor(parseColor(jObject.getString("bannercolourhex").substring(0, jObject.getString("bannercolourhex").length() - 2)));
 
                                     if(jObject.getString("followers").contains(mSettings.getString("username", "username"))){
                                         fab.setImageResource(R.drawable.ic_baseline_person_remove_24);
@@ -243,6 +349,20 @@ public class Profile_page extends AppCompatActivity {
 
                                         fab.setTag(R.drawable.ic_baseline_person_add_24);
                                     }
+
+
+
+
+                                    if(jObject.getInt("enablecommissions") == 0 ){
+                                        commissionbtn.setVisibility(View.INVISIBLE);
+                                        Log.d("commissions","COMMISSIONS NOT ENABLED.");
+                                    }
+
+
+
+
+
+
 
                                     id = jObject.getInt("ID");
                                     Log.i("Un",mSettings.getString("username","username"));
@@ -326,7 +446,8 @@ public class Profile_page extends AppCompatActivity {
                                     jsonItem.getString("filetype"),
                                     jsonItem.getInt("ID"),
                                     jsonItem.getString("description"),
-                                    jsonItem.getString("author")
+                                    jsonItem.getString("author"),
+                                    jsonItem.getString("rating")
                             );
 
                             itemList.add(item);

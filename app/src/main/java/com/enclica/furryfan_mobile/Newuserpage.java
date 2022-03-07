@@ -50,6 +50,7 @@ public class Newuserpage extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         loaduserinfo();
+        //findViewById(R.id.advanced_settings).setVisibility(View.INVISIBLE);
         FloatingActionButton fab = findViewById(R.id.follow);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

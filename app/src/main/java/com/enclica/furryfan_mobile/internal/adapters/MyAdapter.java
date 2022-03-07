@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,15 +35,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private List<Item>itemList;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, subtitle;
+        public String rating;
         public ImageView icon;
         private LinearLayout main;
         private Intent myintent;
+        public ImageView ratingicon;
         public MyViewHolder(final View parent) {
             super(parent);
             title = (TextView) parent.findViewById(R.id.vptitle);
             subtitle = (TextView) parent.findViewById(R.id.commissiondescription_itm);
             icon = (ImageView) parent.findViewById(R.id.icon);
             main = (LinearLayout) parent.findViewById(R.id.main);
+            ratingicon = (ImageView) parent.findViewById(R.id.Ratingsymbol);
 
             main.setOnClickListener(new AdapterView.OnClickListener() {
 
@@ -106,8 +110,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.title.setText(row.getTitle());
         holder.subtitle.setText(Html.fromHtml( row.getSubtitle()));
        // holder.icon.setImageURI(Picasso.get().load(row.getImageURL()); INVALID
+        holder.ratingicon.setVisibility(View.INVISIBLE);
+        holder.rating = row.getRating();
 
-
+        if(holder.rating.equals("Mature")){
+            holder.ratingicon.setVisibility(View.VISIBLE);
+        }
         switch(row.getFiletype()){
             case "mp3":
                 holder.icon.setImageResource(R.drawable.ic_baseline_music_note_24);

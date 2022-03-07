@@ -2,6 +2,7 @@ package com.enclica.furryfan_mobile.ui.commission;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,10 +15,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -30,6 +33,7 @@ import com.enclica.furryfan_mobile.internal.adapters.CommissionAdapter;
 import com.enclica.furryfan_mobile.internal.items.CommissionItem;
 import com.enclica.furryfan_mobile.internal.objects.ImageObject;
 import com.enclica.furryfan_mobile.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,6 +43,7 @@ import java.util.List;
 
 public class CommissionFragment extends Fragment {
     private CommissionViewModel commissionViewModel;
+    private SwipeRefreshLayout refresh;
     private final List<CommissionItem> itemList = new ArrayList<>();
     private RecyclerView recyclerview;
     private CommissionAdapter comAdapter;
@@ -69,8 +74,24 @@ public class CommissionFragment extends Fragment {
 
         recyclerview.setItemAnimator(new DefaultItemAnimator());
 
+
+        refresh = root.findViewById(R.id.swiperefresh);
+
         
+
+
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                refresh.setRefreshing(false);
+            }
+        });
+
         getData();
+
+
+
 
         return root;
     }
@@ -85,6 +106,8 @@ public class CommissionFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
+                   itemList.clear();
+                   comAdapter.notifyDataSetChanged();
 
                     JSONArray allImageArray = new JSONArray(response);
                     if (allImageArray != null && allImageArray.length() > 0) {
@@ -99,7 +122,8 @@ public class CommissionFragment extends Fragment {
                                     jsonItem.getString("sender"),
                                     jsonItem.getInt("ID"),
                                     jsonItem.getInt("approved"),
-                                    jsonItem.getInt("complete")
+                                    jsonItem.getInt("complete"),
+                                    jsonItem.getInt("reported")
                             );
 
                             itemList.add(item);
@@ -113,7 +137,10 @@ public class CommissionFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     Log.e("error",e.toString());
-                    Toast.makeText(getContext(), "A json error occured when loading the posts.   " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    View rootView = ((Activity)getContext()).getWindow().getDecorView().findViewById(android.R.id.content);
+
+
+                    Snackbar.make(rootView, "No commissions at this current time.", Snackbar.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {

@@ -197,7 +197,8 @@ public class HomeFragment extends Fragment {
                                     jsonItem.getString("filetype"),
                                     jsonItem.getInt("ID"),
                                     jsonItem.getString("description"),
-                                    jsonItem.getString("author")
+                                    jsonItem.getString("author"),
+                                    jsonItem.getString("rating")
                             );
 
                             itemList.add(item);

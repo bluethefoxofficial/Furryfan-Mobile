@@ -13,24 +13,24 @@
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/drawable/side_nav_bar.xml" value="0.2838541666666667" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.153515625" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.13422131147540983" />
-        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_imageviewer.xml" value="0.25862068965517243" />
+        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_imageviewer.xml" value="0.288" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_main.xml" value="0.15208333333333332" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_newuserpage.xml" value="0.16799999999999998" />
-        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_profile_page.xml" value="0.2" />
+        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_profile_page.xml" value="0.3958333333333333" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_settings.xml" value="0.19635416666666666" />
-        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_signup.xml" value="0.16979166666666667" />
+        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_signup.xml" value="0.536" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_upload_web_window.xml" value="0.4" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_uploadscreen.xml" value="0.264" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_usershome.xml" value="0.18206521739130435" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/activity_videoplayer.xml" value="0.264" />
-        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/app_bar_main.xml" value="0.264" />
+        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/app_bar_main.xml" value="0.4" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/commission_layout.xml" value="0.264" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/content_main.xml" value="0.17798913043478262" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/content_main2.xml" value="0.17798913043478262" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/content_scrolling.xml" value="0.4" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/content_upload_web_window.xml" value="0.2173202614379085" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/content_usershome.xml" value="0.17798913043478262" />
-        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/fragment_about.xml" value="0.536" />
+        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/fragment_about.xml" value="0.4" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/fragment_chat.xml" value="0.264" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/fragment_commissions.xml" value="0.176" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/fragment_first.xml" value="0.17798913043478262" />
@@ -38,7 +38,7 @@
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/fragment_home.xml" value="0.136" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/fragment_second.xml" value="0.16875" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/fragment_settings_fragment.xml" value="0.2015625" />
-        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/imageitem.xml" value="0.15208333333333332" />
+        <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/imageitem.xml" value="0.2" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/layout/nav_header_main.xml" value="0.2" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/menu/activity_main_drawer.xml" value="0.536" />
         <entry key="..\:/Users/bluet/AndroidStudioProjects/FurryfanMobile/app/src/main/res/menu/menu_profile_page.xml" value="0.2" />
