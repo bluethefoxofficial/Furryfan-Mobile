@@ -1,4 +1,4 @@
-package com.enclica.furryfan_mobile;
+package com.enclica.furryfan_mobile.pages;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +27,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.enclica.furryfan_mobile.R;
 import com.enclica.furryfan_mobile.databinding.ActivityProfilePageBinding;
+import com.enclica.furryfan_mobile.internal.adapters.MyAdapter;
+import com.enclica.furryfan_mobile.internal.items.Item;
+import com.enclica.furryfan_mobile.internal.objects.ImageObject;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;

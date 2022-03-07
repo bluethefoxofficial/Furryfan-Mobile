@@ -1,4 +1,4 @@
-package com.enclica.furryfan_mobile;
+package com.enclica.furryfan_mobile.internal.items;
 
 public class Item {
     private int imageId;
@@ -21,6 +21,9 @@ public class Item {
         this.description = description;
         this.author = author;
     }
+
+
+
     public int getImageId(){return imageId;}
     public void setImageId(int imageId){
         this.imageId=imageId;

@@ -1,4 +1,4 @@
-package com.enclica.furryfan_mobile;
+package com.enclica.furryfan_mobile.internal.adapters;
 
 
 import android.content.Intent;
@@ -15,9 +15,14 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.enclica.furryfan_mobile.internal.items.Item;
+import com.enclica.furryfan_mobile.R;
+import com.enclica.furryfan_mobile.pages.Videoplayer;
+import com.enclica.furryfan_mobile.pages.imageviewer;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.MyViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private List<Item>itemList;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, subtitle;
@@ -35,7 +40,7 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.My
         public MyViewHolder(final View parent) {
             super(parent);
             title = (TextView) parent.findViewById(R.id.vptitle);
-            subtitle = (TextView) parent.findViewById(R.id.commissiondescription);
+            subtitle = (TextView) parent.findViewById(R.id.commissiondescription_itm);
             icon = (ImageView) parent.findViewById(R.id.icon);
             main = (LinearLayout) parent.findViewById(R.id.main);
 
@@ -43,21 +48,25 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.My
 
                 @Override
                 public void onClick(View v) {
-                    //  Toast.makeText(itemView.getContext(), "P-sPosition:" + Integer.toString(getPosition()), Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(itemView.getContext(), "P-sPosition:" + Integer.toString(getPosition()), Toast.LENGTH_SHORT).show();
                     Item itemvalue = itemList.get(getPosition());
 
                     switch(itemvalue.getFiletype())
                     {
                         case "mp4":
+                        case "mp3":
+                        case "wav":
+
                             myintent = new Intent(parent.getContext(), Videoplayer.class);
+                            myintent.putExtra("TEST","TEST");
                             myintent.putExtra("url",itemvalue.getImageURL());
                             myintent.putExtra("author",itemvalue.getAuthor());
                             myintent.putExtra("title",itemvalue.getTitle());
+
                             myintent.putExtra("description",itemvalue.getDescription());
+                            myintent.putExtra("id",itemvalue.getPostID());
+
                             parent.getContext().startActivity(myintent);
-                            break;
-                        case "mp3":
-                            Toast.makeText(itemView.getContext(), "Non functional", Toast.LENGTH_SHORT).show();
                             break;
                         default:
 
@@ -66,7 +75,7 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.My
                             myintent.putExtra("author",itemvalue.getAuthor());
                             myintent.putExtra("title",itemvalue.getTitle());
                             myintent.putExtra("description",itemvalue.getDescription());
-                            parent.getContext().startActivity(myintent);
+                          parent.getContext().startActivity(myintent);
 
                             break;
                     }
@@ -83,11 +92,11 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.My
             });
         }
     }
-    public CommissionAdapter(List<Item>itemList){
+    public MyAdapter(List<Item>itemList){
         this.itemList=itemList;
     }
     @Override
-    public CommissionAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.imageitem,parent,false);
         return new MyViewHolder(itemView);
     }
@@ -96,9 +105,21 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.My
         Item row=itemList.get(position);
         holder.title.setText(row.getTitle());
         holder.subtitle.setText(Html.fromHtml( row.getSubtitle()));
-        // holder.icon.setImageURI(Picasso.get().load(row.getImageURL()); INVALID
+       // holder.icon.setImageURI(Picasso.get().load(row.getImageURL()); INVALID
 
 
+        switch(row.getFiletype()){
+            case "mp3":
+                holder.icon.setImageResource(R.drawable.ic_baseline_music_note_24);
+                break;
+            case "mp4":
+                holder.icon.setImageResource(R.drawable.ic_baseline_ondemand_video_24);
+                break;
+            default:
+                Picasso.get().load(row.getImageURL()).into(holder.icon);
+                break;
+
+        }
     }
     @Override
     public int getItemCount() {

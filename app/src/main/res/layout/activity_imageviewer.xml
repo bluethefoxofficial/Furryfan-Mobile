@@ -3,53 +3,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Videoplayer">
+    android:layout_height="wrap_content">
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="408dp"
+        android:layout_height="wrap_content"
+        android:padding="0px"
+        android:paddingStart="0px"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-       <ImageView
-           android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-           android:layout_height="match_parent"
-           android:src="@drawable/grad_bg"
-           android:id="@+id/imageviews"></ImageView>
-    </FrameLayout>
+            <TextView
+                android:id="@+id/videoviewdescription"
+                android:layout_width="match_parent"
+                android:layout_height="99dp"
+                android:layout_marginEnd="16dp"
+                android:paddingLeft="20px"
+                android:text="This is a placeholder for the description if you see this and are not in devmode please report to the furryfan mobile github."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vptitle" />
 
-    <TextView
-        android:id="@+id/vptitle"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="20px"
-        android:text="Placeholder title"
-        android:textSize="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+            <TextView
+                android:id="@+id/vvusername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:clickable="true"
+                android:minHeight="48dp"
+                android:paddingLeft="20px"
+                android:text="placeholder username"
+                android:textColor="@color/purple_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/videoviewdescription" />
 
-    <TextView
-        android:id="@+id/videoviewdescription"
-        android:layout_width="match_parent"
-        android:layout_height="99dp"
-        android:paddingLeft="20px"
-        android:text="This is a placeholder for the description if you see this and are not in devmode please report to the furryfan mobile github."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vptitle" />
+            <ImageView
+                android:id="@+id/imageviews"
 
-    <TextView
-        android:id="@+id/vvusername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:paddingLeft="20px"
-        android:text="placeholder username"
-        android:textColor="@color/purple_500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoviewdescription" />
+                android:layout_width="687dp"
+                android:layout_height="332dp"
+                android:src="@drawable/grad_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
 
+            <TextView
+                android:id="@+id/vptitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="20px"
+                android:text="Placeholder title"
+                android:textSize="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageviews" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName3"
+                android:layout_width="366dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="170dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Comment"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vvusername" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="66dp"
+                android:layout_height="54dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
+                app:layout_constraintTop_toBottomOf="@+id/vvusername"
+                app:srcCompat="@drawable/ic_baseline_send_24" />
+
+            <ListView
+                android:layout_width="617dp"
+                android:layout_height="1270dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

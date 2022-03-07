@@ -1,4 +1,4 @@
-package com.enclica.furryfan_mobile;
+package com.enclica.furryfan_mobile.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.enclica.furryfan_mobile.R;
 import com.squareup.picasso.Picasso;
 
 public class imageviewer extends AppCompatActivity {

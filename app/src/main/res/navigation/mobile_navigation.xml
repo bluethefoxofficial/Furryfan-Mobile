@@ -20,9 +20,8 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.enclica.furryfan_mobile.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_commissions" />
+        android:name="com.enclica.furryfan_mobile.ui.commission.CommissionFragment"
+        android:label="@string/menu_slideshow" />
 
     <fragment
         android:id="@+id/nav_chats"

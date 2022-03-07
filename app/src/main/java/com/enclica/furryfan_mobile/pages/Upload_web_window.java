@@ -1,6 +1,7 @@
-package com.enclica.furryfan_mobile;
+package com.enclica.furryfan_mobile.pages;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -20,6 +21,8 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
+
+import com.enclica.furryfan_mobile.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,12 +46,13 @@ public class Upload_web_window extends AppCompatActivity {
 
 
 
-        WebView wv = (WebView) findViewById(R.id.wv1);
+        WebView wv = (WebView) findViewById(R.id.wviewer);
 
         // showing the back button in action bar
 
         final SharedPreferences mSettings = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Upload to the furryfan network.");
         wv.getSettings().setAllowContentAccess(true);
         wv.getSettings().setAllowFileAccess(true);
         wv.getSettings().setJavaScriptEnabled(true);
@@ -60,7 +64,7 @@ public class Upload_web_window extends AppCompatActivity {
         String cookieString = "token="+mSettings.getString("token","t")+"; path=/";
         CookieManager.getInstance().setCookie("furryfan.net", cookieString);
 
-       // ActionBar actionBar = getSupportActionBar();
+        // ActionBar actionBar = getSupportActionBar();
 
         wv.setWebViewClient(new WebViewClient() {
 

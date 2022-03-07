@@ -4,6 +4,7 @@ import static android.graphics.Color.parseColor;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,6 +29,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.enclica.furryfan_mobile.pages.Settings;
+import com.enclica.furryfan_mobile.pages.Upload_web_window;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
@@ -91,7 +94,8 @@ public class Newuserpage extends AppCompatActivity {
         switch (item.getItemId()) {
             // action with ID action_refresh was selected
             case R.id.action_feedback:
-                // Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/UvEq2W2G8HbpwhLL8"));
+                startActivity(browserIntent);
                 break;
             // action with ID action_settings was selected
             case R.id.Shouts:

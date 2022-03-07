@@ -26,9 +26,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.enclica.furryfan_mobile.ImageObject;
-import com.enclica.furryfan_mobile.Item;
-import com.enclica.furryfan_mobile.MyAdapter;
+import com.enclica.furryfan_mobile.internal.objects.ImageObject;
+import com.enclica.furryfan_mobile.internal.items.Item;
+import com.enclica.furryfan_mobile.internal.adapters.MyAdapter;
 import com.enclica.furryfan_mobile.R;
 
 import org.json.JSONArray;
@@ -63,7 +63,7 @@ public class GalleryFragment extends Fragment {
     private void getData() {
 
 
-        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        RequestQueue queue = Volley.newRequestQueue(getContext());
         final SharedPreferences mSettings = getContext().getSharedPreferences("Login", MODE_PRIVATE);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://furryfan.net/api?function=browse&num=30&token=" + mSettings.getString("token", ""), new Response.Listener<String>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -120,6 +120,8 @@ public class GalleryFragment extends Fragment {
         queue.add(stringRequest);
 
     }
+
+
 
 
 

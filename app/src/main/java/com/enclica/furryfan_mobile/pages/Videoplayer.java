@@ -1,10 +1,11 @@
-package com.enclica.furryfan_mobile;
+package com.enclica.furryfan_mobile.pages;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -12,6 +13,8 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.enclica.furryfan_mobile.R;
 
 public class Videoplayer extends AppCompatActivity {
 
@@ -49,11 +52,26 @@ public class Videoplayer extends AppCompatActivity {
         });
 
 
+
         ActionBar actionBar = getSupportActionBar();
 
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
+        un.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent myintent = new Intent(getApplicationContext(), Profile_page.class);
+                myintent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                myintent.putExtra("profile",secondIntent.getStringExtra("author"));
+                getApplicationContext().startActivity(myintent);
+            }
+
+
+        });
     }
+
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

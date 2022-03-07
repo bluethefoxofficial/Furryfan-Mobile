@@ -1,4 +1,4 @@
-package com.enclica.furryfan_mobile;
+package com.enclica.furryfan_mobile.internal.objects;
 
 import org.json.JSONObject;
 

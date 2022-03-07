@@ -30,9 +30,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.enclica.furryfan_mobile.ImageObject;
-import com.enclica.furryfan_mobile.Item;
-import com.enclica.furryfan_mobile.MyAdapter;
+import com.enclica.furryfan_mobile.internal.objects.ImageObject;
+import com.enclica.furryfan_mobile.internal.items.Item;
+import com.enclica.furryfan_mobile.internal.adapters.MyAdapter;
 import com.enclica.furryfan_mobile.R;
 import com.squareup.picasso.Picasso;
 
@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
         usernametext = root.findViewById(R.id.username);
         bio = root.findViewById(R.id.biotext);
         profilepicture = root.findViewById(R.id.imageView2);
-        bg = root.findViewById(R.id.background);
+        bg = null;
 
         recyclerview= root.findViewById(R.id.userhomeposts);
         mAdapter = new MyAdapter(itemList);
@@ -138,10 +138,6 @@ public class HomeFragment extends Fragment {
                             }
 
                             iv.setBackgroundColor(parseColor(jObject.getString("bannercolourhex").substring(0, jObject.getString("bannercolourhex").length() -2)));
-
-
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -219,14 +215,14 @@ public class HomeFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getContext(), "A json error occured when loading the posts.   " + e.getMessage(), Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(getContext(), "A json error occured when loading the posts.   " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "A server error occured when loading the posts.", Toast.LENGTH_LONG).show();
+             //   Toast.makeText(getContext(), "A server error occured when loading the posts.", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -1,5 +1,6 @@
 package com.enclica.furryfan_mobile;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -45,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
                 finish();
 
             }
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(getApplicationContext());
+            dlgAlert.setMessage("This app is experimental and will change quickly you're essentially an alpha tester.");
+            dlgAlert.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
             rellay1.setVisibility(View.VISIBLE);
             rellay2.setVisibility(View.VISIBLE);
         }
@@ -63,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.hide();
         handler.postDelayed(runnable, 2000); //2000 is the timeout for the splash
+
     }
     //login verification code
     public void login() {

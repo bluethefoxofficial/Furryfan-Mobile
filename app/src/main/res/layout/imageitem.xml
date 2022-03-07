@@ -33,7 +33,7 @@
         android:textSize="24dp" />
 
     <TextView
-        android:id="@+id/commissiondescription"
+        android:id="@+id/commissiondescription_itm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vptitle"

@@ -1,6 +1,7 @@
-package com.enclica.furryfan_mobile;
+package com.enclica.furryfan_mobile.pages;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -19,6 +20,8 @@ import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.enclica.furryfan_mobile.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +47,8 @@ public class Settings extends AppCompatActivity {
 
         final SharedPreferences mSettings = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Furryfan settings");
         WebView wv = (WebView) findViewById(R.id.wviewer);
         wv.getSettings().setAllowContentAccess(true);
         wv.getSettings().setAllowFileAccess(true);

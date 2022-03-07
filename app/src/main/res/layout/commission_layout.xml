@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
-    android:focusable="true"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:clickable="true"
-    android:background="?android:attr/selectableItemBackground"
-    android:orientation="vertical">
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="10dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="10dp">
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/name_itm"
         android:layout_width="391dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/icon"
@@ -23,7 +23,7 @@
         android:textSize="24dp" />
 
     <TextView
-        android:id="@+id/refsheet"
+        android:id="@+id/refsheet_itm"
         android:layout_width="391dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/icon"
@@ -33,7 +33,7 @@
         android:textSize="24dp" />
 
     <TextView
-        android:id="@+id/commissiondescription"
+        android:id="@+id/commissiondescription_itm"
         android:layout_width="391dp"
         android:layout_height="159dp"
         android:layout_below="@+id/vptitle"
@@ -43,24 +43,34 @@
         android:textSize="14dp" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="391dp"
+        android:id="@+id/btn1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_bg"
-        android:text="Approve" />
+        android:backgroundTint="#00C853"
+        android:text="Accept"
+        app:cornerRadius="60px" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="391dp"
+        android:id="@+id/btn2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_bg"
-        android:text="Decline" />
+        android:backgroundTint="#FFD600"
+        android:text="Decline"
+        app:cornerRadius="60px" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="391dp"
+        android:id="@+id/btn3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_bg"
-        android:text="Report" />
+        android:backgroundTint="#D50000"
+        android:text="Report"
+        app:cornerRadius="60px" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#575757"
+        android:backgroundTint="#575757"
+        android:backgroundTintMode="add" />
 
 </LinearLayout>
