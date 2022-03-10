@@ -1,5 +1,6 @@
 package com.enclica.furryfan_mobile.pages;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Intent;
@@ -39,17 +40,13 @@ public class Upload_web_window extends AppCompatActivity {
     private ValueCallback<Uri[]> mFilePathCallback;
     private String mCameraPhotoPath;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_web_window);
-
-
-
         WebView wv = (WebView) findViewById(R.id.wviewer);
-
         // showing the back button in action bar
-
         final SharedPreferences mSettings = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Upload to the furryfan network.");
@@ -209,22 +206,13 @@ public class Upload_web_window extends AppCompatActivity {
         mFilePathCallback = null;
     }
 
-
-
-
-
-
-
-
-
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }

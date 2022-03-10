@@ -3,7 +3,11 @@ package com.enclica.furryfan_mobile.ui.about;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import com.enclica.furryfan_mobile.BuildConfig;
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
+
+import android.provider.DocumentsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +34,7 @@ public class AboutFragment extends Fragment {
     public TextView secretmenu;
     public Chip twitter;
     public Button osl;
+    public TextView about;
     private int counter = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,9 @@ public class AboutFragment extends Fragment {
 
         secretmenu = (TextView) root.findViewById(R.id.advanced_settings);
 
+        about = (TextView) root.findViewById(R.id.version);
+
+        about.setText("version : " + BuildConfig.VERSION_NAME);
         secretmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +66,7 @@ public class Profile_page extends AppCompatActivity {
     private List<Item> itemList = new ArrayList<>();
     Toolbar toolbar;
     public String username;
+    public String userid;
     MyAdapter mAdapter;
     SharedPreferences mSettings;
     private View root;
@@ -235,101 +237,161 @@ public class Profile_page extends AppCompatActivity {
 
                             CoordinatorLayout bg = Profile_page.this.findViewById(R.id.backgroundprofile);
                             FloatingActionButton commissionbtn = Profile_page.this.findViewById(R.id.Combtn);
+                            FloatingActionButton messagebtn = Profile_page.this.findViewById(R.id.messagebtn);
                             ImageView profilepciture = Profile_page.this.findViewById(R.id.profilepictureprofile);
                             ImageView verified = Profile_page.this.findViewById(R.id.imageView5);
 
                             commissionbtn.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View view) {
+                                      AlertDialog.Builder builder = new AlertDialog.Builder(Profile_page.this);
+                                      LinearLayout layout = new LinearLayout(Profile_page.this);
+                                      layout.setOrientation(LinearLayout.VERTICAL);
+
+                                      builder.setTitle("Request commission.");
+
+// Set up the input
+                                      final EditText input = new EditText(Profile_page.this);
+                                      final EditText inputtwo = new EditText(Profile_page.this);
+                                      final EditText inputthree = new EditText(Profile_page.this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                                      input.setInputType(InputType.TYPE_CLASS_TEXT);
+                                      input.setHint("Name");
+                                      layout.addView(input);
+                                      inputtwo.setInputType(InputType.TYPE_CLASS_TEXT);
+                                      inputtwo.setHint("Refsheet");
+                                      layout.addView(inputtwo);
+                                      inputthree.setInputType(InputType.TYPE_CLASS_TEXT);
+                                      inputthree.setHint("Details of commission.");
+
+
+
+                                      layout.addView(inputthree);
+
+                                      builder.setView(layout);
+
+// Set up the buttons
+                                      builder.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
+                                          @Override
+                                          public void onClick(DialogInterface dialog, int which) {
+                                              StringRequest postRequest = new StringRequest(Request.Method.POST, "https://furryfan.net/api/", new Response.Listener<String>() {
+                                                  @Override
+                                                  public void onResponse(String response) {
+                                                      Log.i("FRESPONSE",response);
+                                                      Snackbar.make(getWindow().getDecorView().getRootView(), "Sent request.", Snackbar.LENGTH_LONG)
+                                                              .setAction("Action", null).show();
+                                                      Log.i("t","IT WORKS I THINK?");
+                                                  }
+                                              },
+                                                      new Response.ErrorListener() {
+                                                          @Override
+                                                          public void onErrorResponse(VolleyError error) {
+                                                              Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to send request", Snackbar.LENGTH_LONG)
+                                                                      .setAction("Action", null).show();
+                                                              Log.i("t","DAMN IT!");
+                                                          }
+                                                      }
+                                              ) {
+                                                  @Override
+                                                  protected Map<String, String> getParams() {
+                                                      Map<String, String> params = new HashMap<String, String>();
+                                                      params.put("token", mSettings.getString("token","token"));
+                                                      params.put("receiver", username);
+                                                      params.put("refsheet", input.getText().toString());
+                                                      params.put("description", inputtwo.getText().toString());
+                                                      params.put("name", inputthree.getText().toString());
+                                                      params.put("function", "sendcommission");
+
+                                                      return params;
+                                                  }
+                                              };
+
+                                              RequestQueue queue = Volley.newRequestQueue(Profile_page.this);
+                                              queue.add(postRequest);
+                                              Log.d("hi","SPECIFIC TEXT HELLO");
+                                          }
+
+                                      });
+                                      builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                          @Override
+                                          public void onClick(DialogInterface dialog, int which) {
+                                              dialog.cancel();
+                                              Log.d("hi","SPECIFIC TEXT");
+                                          }
+                                      });
+
+                                      builder.show();
+                                 }
+                            });
+
+                            messagebtn.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(Profile_page.this);
+                                    // Set the dialog title
+                                    builder.setTitle("Send message...");
+
+
+                                    final EditText message = new EditText(Profile_page.this);
 
 
 
+                                    message.setHint("Message");
 
-                                    AlertDialog.Builder alert = new AlertDialog.Builder(Profile_page.this);
+                                    builder.setView(message);
 
-                                    alert.setTitle("Send commission request to "+username+".");
-
-                                    LinearLayout layout = new LinearLayout(getApplicationContext());
-                                    layout.setOrientation(LinearLayout.VERTICAL);
-
-
-                                    EditText name = new EditText(getApplicationContext());
-                                    name.setHint("Your name");
-                                    name.setMaxLines(2);
-                                    layout.addView(name);
-
-
-                                    EditText refsheeturl = new EditText(getApplicationContext());
-                                    refsheeturl.setHint("Your reference sheet URL for your character.");
-                                    refsheeturl.setMaxLines(2);
-                                    layout.addView(refsheeturl);
-
-                                    EditText details = new EditText(getApplicationContext());
-                                    details.setHint("Details about this commission.");
-                                    details.setMaxLines(10);
-                                    layout.addView(details);
-
-
-
-
-                                    alert.setPositiveButton("Send request", new DialogInterface.OnClickListener() {
-
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-
-                                            StringRequest postRequest = new StringRequest(Request.Method.POST, "https://furryfan.net/api/",
-                                                    new Response.Listener<String>() {
+                                            // Set the action buttons
+                                            builder.setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    StringRequest postRequest = new StringRequest(Request.Method.POST, "https://furryfan.net/api/", new Response.Listener<String>() {
                                                         @Override
                                                         public void onResponse(String response) {
                                                             Log.i("FRESPONSE",response);
-                                                            Snackbar.make(getWindow().getDecorView().getRootView(), "Sent request.", Snackbar.LENGTH_LONG)
+                                                            Snackbar.make(getWindow().getDecorView().getRootView(), "Sent message.", Snackbar.LENGTH_LONG)
                                                                     .setAction("Action", null).show();
                                                             Log.i("t","IT WORKS I THINK?");
                                                         }
                                                     },
-                                                    new Response.ErrorListener() {
+                                                            new Response.ErrorListener() {
+                                                                @Override
+                                                                public void onErrorResponse(VolleyError error) {
+                                                                    Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to send message", Snackbar.LENGTH_LONG)
+                                                                            .setAction("Action", null).show();
+                                                                    Log.i("t","DAMN IT!");
+                                                                }
+                                                            }
+                                                    ) {
                                                         @Override
-                                                        public void onErrorResponse(VolleyError error) {
-                                                            Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to send request", Snackbar.LENGTH_LONG)
-                                                                    .setAction("Action", null).show();
-                                                            Log.i("t","DAMN IT!");
+                                                        protected Map<String, String> getParams() {
+                                                            Map<String, String> params = new HashMap<String, String>();
+                                                            params.put("token", mSettings.getString("token","token"));
+                                                            params.put("userid", userid);
+                                                            params.put("message",message.getText().toString());
+                                                            params.put("function", "sendpm");
+
+                                                            return params;
                                                         }
-                                                    }
-                                            ) {
-                                                @Override
-                                                protected Map<String, String> getParams() {
-                                                    Map<String, String> params = new HashMap<String, String>();
-                                                    params.put("token", mSettings.getString("token","token"));
-                                                    params.put("receiver", username);
-                                                    params.put("refsheet", refsheeturl.getText().toString());
-                                                    params.put("description", details.getText().toString());
-                                                    params.put("name", name.getText().toString());
-                                                    params.put("function", "sendcommission");
+                                                    };
 
-                                                    return params;
+                                                    RequestQueue queue = Volley.newRequestQueue(Profile_page.this);
+                                                    queue.add(postRequest);
                                                 }
-                                            };
+                                            });
+                                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int id) {
 
-
-                                        }
-
-                                    });
-
-                                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-                                            Log.d("e","EEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-                                        }
-                                    });
-                                    alert.setView(layout);
-
-                                    alert.show();
-
-
-
-
+                                                }
+                                            });
+                                    builder.show();
                                 }
+
                             });
 
-                            Log.i("t","This might work?");
+
+
+                                    Log.i("t", "This might work?");
 
                             bio.setText(jObject.getString("bio").replaceAll("\\[[^]]+]",""));
                             Picasso.get().load("https://cdn.furryfan.net/art/" + jObject.getString("username") + "/data/pfp/" + jObject.getString("profilepicture").replace("_sm_400", "_sm_200")).into(profilepciture);
@@ -338,6 +400,7 @@ public class Profile_page extends AppCompatActivity {
                                        verified.setImageResource(R.drawable.ic_baseline_verified_24);
                                     }
                                     username = jObject.getString("username");
+                                    userid = jObject.getString("ID");
 
                                     bg.setBackgroundColor(parseColor(jObject.getString("bannercolourhex").substring(0, jObject.getString("bannercolourhex").length() - 2)));
 

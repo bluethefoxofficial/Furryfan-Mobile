@@ -9,6 +9,8 @@ import org.json.JSONObject;
 
 public class POSTREQ {
 
+    //unused
+
     public void postrequest(String URL, JSONObject parameters){
 
 

@@ -9,6 +9,18 @@
     android:fitsSystemWindows="true"
     tools:context=".pages.Profile_page">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/blockuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:layout_anchorGravity="bottom|right"
+        app:srcCompat="@drawable/ic_baseline_block_24" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"

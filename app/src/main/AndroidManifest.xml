@@ -13,7 +13,6 @@
         android:theme="@style/Theme.FurryfanMobile">
         <activity
             android:name=".pages.Upload_web_window"
-
             android:exported="false"
             android:label="@string/title_activity_upload_web_window"
             android:theme="@style/Theme.FurryfanMobile" />
@@ -37,7 +36,6 @@
         <activity android:exported="true" android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -58,7 +58,7 @@ public class signup extends AppCompatActivity {
 
                             } else {
                                 JSONObject jsonObject = new JSONObject(response);
-                                Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to login. Please check your username and password and try again.", Snackbar.LENGTH_LONG)
+                                Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to Register, try again.", Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
 
                             }
@@ -73,7 +73,7 @@ public class signup extends AppCompatActivity {
 
 
                             } catch (JSONException jsonException) {
-                                Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to login JSON response error" + e.getMessage(), Snackbar.LENGTH_LONG)
+                                Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to register JSON response error" + e.getMessage(), Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
                             }
 
@@ -84,7 +84,7 @@ public class signup extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to login server connection error", Snackbar.LENGTH_LONG)
+                        Snackbar.make(getWindow().getDecorView().getRootView(), "Failed to communicate to register server connection error", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
                 }
